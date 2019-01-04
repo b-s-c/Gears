@@ -7,7 +7,6 @@ function setup() {
 
 function draw() {
   background(100); // Drawn here so that the gear doesn't leave a trail behind
-<<<<<<< HEAD
   let g = new Gear(mouseX, mouseY);
   g.draw();
 }
@@ -31,7 +30,7 @@ class Gear{
       angle +=.3; // Adjust how fast the gear should spin
    }
 }
-=======
+
   ellipse(mouseX, mouseY, 100, 100); // Draw the main circle
   ellipse(gear.x, gear.y, 100, 100);
   fill(230, 220, 100); // Set gear colour
@@ -46,4 +45,3 @@ class Gear{
   }
   angle +=.3; // Adjust how fast the gear should spin
 }
->>>>>>> e004513e3a016ac050a255b189e545a658173248
