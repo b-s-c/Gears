@@ -13,7 +13,7 @@ function setup() {
 function draw() {
   background(100); // Drawn here so that the gear doesn't leave a trail behind
   ellipse(mouseX, mouseY, 100, 100); // Draw the main circle
-  ellipse(gear1.x, gear1.y, 100, 100);
+  ellipse(gear.x, gear.y, 100, 100);
   fill(230, 220, 100); // Set gear colour
   noStroke(); // Ensure that the teeth don't have an outline
   for (var i = 0; i < 360; i += 30) { // Draw a tooth on the gear 12 times (360/30) 
