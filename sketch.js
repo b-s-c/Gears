@@ -30,7 +30,7 @@ function draw() {
   text("Tooth height: " + toothheight, toothSlider.x * 2 + toothSlider.width, toothSlider.y + 16);
 
   // speed
-  // let speed = 0;
+  // let speed = 0; // very useful for testing
   let speed = speedSlider.value();
   text("Speed: " + speed, speedSlider.x * 2 + speedSlider.width, speedSlider.y + 16);
   
