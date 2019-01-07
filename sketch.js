@@ -8,7 +8,7 @@ function setup() {
   speedSlider.style('width', '300px');
 
   //toothSlider
-  toothSlider = createSlider(-9, 25, 0, 0.1);
+  toothSlider = createSlider(0, 100, 10, 1);
   toothSlider.position(10,10);
   toothSlider.style('width', '300px');
 }
@@ -20,20 +20,19 @@ function draw() {
   fill(0);
   textSize(21);
 
-
   // speed
+  // let speed = 0;
   let speed = speedSlider.value();
   text("Speed: " + speed, speedSlider.x * 2 + speedSlider.width, speedSlider.y + 16);
   
   // tooth height
-  let toothheightmodifier = toothSlider.value() // Default toothheight is 10, for reference (so putting -7 here would make the teeth 3 high)
-  let toothheightdisplay = toothheightmodifier + 10
-  text("Tooth height: " + toothheightdisplay, toothSlider.x * 2 + toothSlider.width, toothSlider.y + 16);
+  let toothheight = toothSlider.value() // Default toothheight is 10
+  text("Tooth height: " + toothheight, toothSlider.x * 2 + toothSlider.width, toothSlider.y + 16);
 
-  let g = new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheightmodifier, 100);
+  let g = new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, 100);
   g.draw();
-  // let g2 = new Gear(mouseX+100+10+toothheightmodifier, mouseY, 139, 0, 0, speed, -1, 15, toothheightmodifier); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
-  // g2.draw();
+  let g2 = new Gear(mouseX+100+toothheight, mouseY, 139, 0, 0, speed, -1, 15, toothheight, 100); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
+  g2.draw();
 }
 
 var angle = 0 // This needs to be global, since gears can't move at different rates
@@ -47,9 +46,9 @@ class Gear{
       this.colB = colB;
       this.speed = speed;
       this.direction = direction; // 1 (clockwise) or -1 (counter-clockwise)
-      this.offset = offset // Angle offset, to interlock with neighbouring gears
-      this.toothheight = toothheight
-      this.diameter = diameter
+      this.offset = offset; // Angle offset, to interlock with neighbouring gears
+      this.toothheight = toothheight;
+      this.diameter = diameter;
    }
    draw(){
       fill(this.colR, this.colG, this.colB); // Set gear colour    
@@ -62,11 +61,14 @@ class Gear{
         push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
         translate(this.x, this.y); // Ensures that the teeth move with the gear
         rotate(radians((angle + i + this.offset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
-        quad(-5, -60-this.toothheight, 5, -60-this.toothheight, 8, -50, -8, -50); // The drawing of the tooth (trapezium-shaped)
+        
+        let loY = -(this.diameter/2) + 1;
+        let hiY = loY - this.toothheight;
+        quad(-5, hiY, 5, hiY, 8, loY, -8, loY); // The drawing of the tooth (trapezium-shaped)
         pop(); // See push();
       }
       angle += this.speed; // Adjust how fast the gear should spin
       angle = angle % 360;
-      print(this.diameter);
+      // print(loY, hiY);
    }
 }
