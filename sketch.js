@@ -2,15 +2,20 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60);
 
-  // speedSlider
-  speedSlider = createSlider(0, 5, 1, 0.1);
-  speedSlider.position(10,50);
-  speedSlider.style('width', '300px');
-
   //toothSlider
   toothSlider = createSlider(0, 100, 10, 1);
-  toothSlider.position(10,10);
+  toothSlider.position(10, 10);
   toothSlider.style('width', '300px');
+
+  //speedSlider
+  speedSlider = createSlider(0, 5, 1, 0.1);
+  speedSlider.position(10, 50);
+  speedSlider.style('width', '300px');
+
+  //g2sizeSlider
+  g2sizeSlider = createSlider(10, 250, 100, 1);
+  g2sizeSlider.position(10, 90);
+  g2sizeSlider.style('width', '300px');
 }
 
 function draw() {
@@ -20,18 +25,27 @@ function draw() {
   fill(0);
   textSize(21);
 
+  // tooth height
+  let toothheight = toothSlider.value() // Default toothheight is 10
+  text("Tooth height: " + toothheight, toothSlider.x * 2 + toothSlider.width, toothSlider.y + 16);
+
   // speed
   // let speed = 0;
   let speed = speedSlider.value();
   text("Speed: " + speed, speedSlider.x * 2 + speedSlider.width, speedSlider.y + 16);
   
-  // tooth height
-  let toothheight = toothSlider.value() // Default toothheight is 10
-  text("Tooth height: " + toothheight, toothSlider.x * 2 + toothSlider.width, toothSlider.y + 16);
+  // g2size
+  let g2size = g2sizeSlider.value()
+  text("Diameter of g2: " + g2size, g2sizeSlider.x * 2 + g2sizeSlider.width, g2sizeSlider.y + 16);
 
+  // g (Gear no. 1)
   let g = new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, 100);
   g.draw();
-  let g2 = new Gear(mouseX+100+toothheight, mouseY, 139, 0, 0, speed, -1, 15, toothheight, 100); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
+
+  // print(g.x) // How to get a parameter (example for quick reference)
+  
+  // g2 (Gear no.2)
+  let g2 = new Gear(mouseX + g.diameter/2 + g2size/2 + toothheight, mouseY, 139, 0, 0, speed, -1, 15, toothheight, g2size); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
   g2.draw();
 }
 
@@ -65,6 +79,7 @@ class Gear{
         let loY = -(this.diameter/2) + 1;
         let hiY = loY - this.toothheight;
         quad(-5, hiY, 5, hiY, 8, loY, -8, loY); // The drawing of the tooth (trapezium-shaped)
+
         pop(); // See push();
       }
       angle += this.speed; // Adjust how fast the gear should spin
