@@ -1,6 +1,8 @@
+// Customisable gears
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  frameRate(60);
+  frameRate(60); // High refresh rates like 144 and 165 break the motion slightly, but they're not recommended anyway
 
   //toothSlider
   toothSlider = createSlider(0, 100, 10, 1);
@@ -39,7 +41,7 @@ function draw() {
   text("Diameter of g2: " + g2size, g2sizeSlider.x * 2 + g2sizeSlider.width, g2sizeSlider.y + 16);
 
   // g (Gear no. 1)
-  let g = new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, 100);
+  let g = new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, 200);
   g.draw();
 
   // print(g.x) // How to get a parameter (example for quick reference)
@@ -87,3 +89,9 @@ class Gear{
       // print(loY, hiY);
    }
 }
+
+// TODO
+// teeth width - more trapezium altering, also look into limits to prevent silly gears
+// more colour options - maybe a colour picker library?
+// button to add gears - look into arrays! (instead of g1, g2 and such)
+// probably more stuff too
