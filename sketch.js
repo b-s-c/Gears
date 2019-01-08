@@ -22,7 +22,8 @@ function setup() {
 
 function draw() {
   background(100); // Drawn here so that the gear doesn't leave a trail behind
-  
+  gears = []; // Store our gears in an array rather than g1, g2, g3 and so on...
+
   // Text setup
   fill(0);
   textSize(21);
@@ -41,14 +42,14 @@ function draw() {
   text("Diameter of g2: " + g2size, g2sizeSlider.x * 2 + g2sizeSlider.width, g2sizeSlider.y + 16);
 
   // g (Gear no. 1)
-  let g = new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, 200);
-  g.draw();
+  gears.push(new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, 200));
+  gears[0].draw();
 
   // print(g.x) // How to get a parameter (example for quick reference)
   
   // g2 (Gear no.2)
-  let g2 = new Gear(mouseX + g.diameter/2 + g2size/2 + toothheight, mouseY, 139, 0, 0, speed, -1, 15, toothheight, g2size); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
-  g2.draw();
+  gears.push(new Gear(mouseX + gears[0].diameter/2 + g2size/2 + toothheight, mouseY, 139, 0, 0, speed, -1, 15, toothheight, g2size)); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
+  gears[1].draw();
 }
 
 var angle = 0 // This needs to be global, since gears can't move at different rates
@@ -94,4 +95,5 @@ class Gear{
 // teeth width - more trapezium altering, also look into limits to prevent silly gears
 // more colour options - maybe a colour picker library?
 // button to add gears - look into arrays! (instead of g1, g2 and such)
+// sparks!
 // probably more stuff too
