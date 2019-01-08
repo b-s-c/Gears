@@ -93,9 +93,9 @@ class Gear{
 
         // Measuring out how to draw the trapezium-shaped teeth
         let yLO = -(this.diameter/2) + 1; // +1 for making sure there's no gap between the circle and tooth
-        let yHI = yLO - this.toothheight;
-        let xHI = this.toothwidth/2
-        let xLO = xHI * (5/8) // Keeps the trapezium shape scale true to the original sketch
+        let yHI = (yLO - this.toothheight);
+        let xHI = this.toothwidth/2;
+        let xLO = xHI * (5/8); // (5/8) keeps the trapezium shape scale true to the original sketch
 
         quad(-xLO, yHI, xLO, yHI, xHI, yLO, -xHI, yLO); // The drawing of the tooth
 
@@ -103,7 +103,6 @@ class Gear{
       }
       angle += this.speed; // Adjust how fast the gear should spin
       angle = angle % 360;
-      // print(loY, hiY);
    }
 }
 
