@@ -78,25 +78,26 @@ function draw() {
   text("Number of teeth", teethamountbox.x + teethamountbox.width + 10, teethamountbox.y + 16);
 
   // gears[0]
-  gears.push(new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, toothwidth, toothoffset, teethamount, 100));
+  gears.push(new Gear(mouseX, mouseY, 100, 120, 130, 255, speed, 1, 0, toothheight, toothwidth, toothoffset, teethamount, 100));
   gears[0].draw();
 
   // print(gears[0].x) // How to get a parameter (example for quick reference)
   
   // gears[1]
-  gears.push(new Gear(mouseX + gears[0].diameter/2 + g2size/2 + toothheight, mouseY, 139, 0, 0, speed, -1, angleoffset, toothheight, toothwidth, toothoffset, teethamount, g2size)); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
+  gears.push(new Gear(mouseX + gears[0].diameter/2 + g2size/2 + toothheight, mouseY, 139, 0, 0, 255, speed, -1, angleoffset, toothheight, toothwidth, toothoffset, teethamount, g2size)); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
   gears[1].draw();
 }
 
 var angle = 0 // This needs to be global, since gears can't move at different rates
 
 class Gear{
-   constructor(x, y, colR, colG, colB, speed, direction, angleoffset, toothheight, toothwidth, toothoffset, teethamount, diameter){
+   constructor(x, y, colR, colG, colB, alpha, speed, direction, angleoffset, toothheight, toothwidth, toothoffset, teethamount, diameter){
       this.x = x;
       this.y = y;
       this.colR = colR;
       this.colG = colG;
       this.colB = colB;
+      this.alpha = alpha
       this.speed = speed;
       this.direction = direction; // 1 (clockwise) or -1 (counter-clockwise)
       this.angleoffset = angleoffset; // Angle offset, to interlock with neighbouring gears
@@ -107,11 +108,11 @@ class Gear{
       this.diameter = diameter;
    }
    draw(){
-      fill(this.colR, this.colG, this.colB); // Set gear colour    
+      fill(this.colR, this.colG, this.colB, this.alpha); // Set gear colour    
       ellipse(this.x, this.y, this.diameter, this.diameter); // Draw the main circle
       fill(0); // Set colour to black
       ellipse(this.x, this.y, 20, 20);
-      fill(this.colR, this.colG, this.colB); // Set tooth colour 
+      fill(this.colR, this.colG, this.colB, this.alpha); // Set tooth colour 
       noStroke(); // Ensure that the teeth don't have an outline
       for (var i = 0; i < 360; i += 360/this.teethamount) { // Draw a tooth on the gear a given number of times 
         push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
@@ -135,7 +136,6 @@ class Gear{
 }
 
 // TODO
-// add transparency
 // make a nice example sketch
 // more colour options
 // button to add gears (and remove them - so possibly left click right click)
