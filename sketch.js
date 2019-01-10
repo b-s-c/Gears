@@ -5,7 +5,7 @@ function setup() {
   frameRate(60); // High refresh rates like 144 and 165 break the motion slightly, but they're not recommended anyway
 
   //toothoSlider (offset)
-  toothoSlider = createSlider(-10, 3, 1, 0.1);
+  toothoSlider = createSlider(-10, 10, 1, 0.1);
   toothoSlider.position(10, 10);
   toothoSlider.style('width', '300px');
 
@@ -19,19 +19,29 @@ function setup() {
   toothwSlider.position(10, 90);
   toothwSlider.style('width', '300px');
 
-  //speedSlider (width)
+  //angleSlider (angle offset)
+  angleSlider = createSlider(0, 360, 15, 1);
+  angleSlider.position(10, 130);
+  angleSlider.style('width', '300px');
+
+  //speedSlider
   speedSlider = createSlider(0, 5, 1, 0.1);
-  speedSlider.position(10, 130);
+  speedSlider.position(10, 170);
   speedSlider.style('width', '300px');
 
   //g2sizeSlider
-  g2sizeSlider = createSlider(10, 250, 100, 1);
-  g2sizeSlider.position(10, 170);
+  g2sizeSlider = createSlider(10, 400, 100, 1);
+  g2sizeSlider.position(10, 210);
   g2sizeSlider.style('width', '300px');
+
+  teethamountbox = createInput("10");
+  teethamountbox.position(toothoSlider.width + 250, 10);
+  teethamountbox.size(250);
 }
 
 function draw() {
   background(50); // Drawn here so that the gear doesn't leave a trail behind
+  
   gears = []; // Store our gears in an array rather than g1, g2, g3 and so on...
 
   // Text setup
@@ -48,7 +58,11 @@ function draw() {
 
   // tooth width
   let toothwidth = toothwSlider.value()
-  text("Tooth width: " + toothwidth, toothwSlider.x * 2 + toothwSlider.width, toothwSlider.y + 16);  
+  text("Tooth width: " + toothwidth, toothwSlider.x * 2 + toothwSlider.width, toothwSlider.y + 16);
+
+  // angle offset
+  let angleoffset = angleSlider.value();
+  text("Angle offset: " + angleoffset, angleSlider.x * 2 + angleSlider.width, angleSlider.y + 16);
 
   // speed
   // let speed = 0; // very useful for testing
@@ -59,21 +73,25 @@ function draw() {
   let g2size = g2sizeSlider.value()
   text("Diameter of g2: " + g2size, g2sizeSlider.x * 2 + g2sizeSlider.width, g2sizeSlider.y + 16);
 
+  // teethamount
+  let teethamount = teethamountbox.value();
+  text("Number of teeth", teethamountbox.x + teethamountbox.width + 10, teethamountbox.y + 16);
+
   // gears[0]
-  gears.push(new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, toothwidth, toothoffset, 100));
+  gears.push(new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, toothwidth, toothoffset, teethamount, 100));
   gears[0].draw();
 
   // print(gears[0].x) // How to get a parameter (example for quick reference)
   
   // gears[1]
-  gears.push(new Gear(mouseX + gears[0].diameter/2 + g2size/2 + toothheight, mouseY, 139, 0, 0, speed, -1, 15, toothheight, toothwidth, toothoffset, g2size)); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
+  gears.push(new Gear(mouseX + gears[0].diameter/2 + g2size/2 + toothheight, mouseY, 139, 0, 0, speed, -1, angleoffset, toothheight, toothwidth, toothoffset, teethamount, g2size)); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
   gears[1].draw();
 }
 
 var angle = 0 // This needs to be global, since gears can't move at different rates
 
 class Gear{
-   constructor(x, y, colR, colG, colB, speed, direction, offset, toothheight, toothwidth, toothoffset, diameter){
+   constructor(x, y, colR, colG, colB, speed, direction, angleoffset, toothheight, toothwidth, toothoffset, teethamount, diameter){
       this.x = x;
       this.y = y;
       this.colR = colR;
@@ -81,10 +99,11 @@ class Gear{
       this.colB = colB;
       this.speed = speed;
       this.direction = direction; // 1 (clockwise) or -1 (counter-clockwise)
-      this.offset = offset; // Angle offset, to interlock with neighbouring gears
+      this.angleoffset = angleoffset; // Angle offset, to interlock with neighbouring gears
       this.toothheight = toothheight;
       this.toothwidth = toothwidth;
       this.toothoffset = toothoffset;
+      this.teethamount = teethamount;
       this.diameter = diameter;
    }
    draw(){
@@ -94,10 +113,10 @@ class Gear{
       ellipse(this.x, this.y, 20, 20);
       fill(this.colR, this.colG, this.colB); // Set tooth colour 
       noStroke(); // Ensure that the teeth don't have an outline
-      for (var i = 0; i < 360; i += 30) { // Draw a tooth on the gear 12 times (360/30) 
+      for (var i = 0; i < 360; i += 360/this.teethamount) { // Draw a tooth on the gear a given number of times 
         push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
         translate(this.x, this.y); // Ensures that the teeth move with the gear
-        rotate(radians((angle + i + this.offset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
+        rotate(radians((angle + i + this.angleoffset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
         
 
         // Measuring out how to draw the trapezium-shaped teeth
@@ -116,7 +135,8 @@ class Gear{
 }
 
 // TODO
-// add toothoffset to counterbalance the trapezium calcs leaving gaps for bigger gears (default = 1), get rid of toothscale
+// add transparency
+// make a nice example sketch
 // more colour options
 // button to add gears (and remove them - so possibly left click right click)
 // sparks!
