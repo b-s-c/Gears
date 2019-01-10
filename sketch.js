@@ -4,22 +4,22 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60); // High refresh rates like 144 and 165 break the motion slightly, but they're not recommended anyway
 
-  //toothsSlider
-  toothsSlider = createSlider(0, 5, 1, 0.01);
-  toothsSlider.position(10, 10);
-  toothsSlider.style('width', '300px');
+  //toothoSlider (offset)
+  toothoSlider = createSlider(-10, 3, 1, 0.1);
+  toothoSlider.position(10, 10);
+  toothoSlider.style('width', '300px');
 
-  //toothhSlider
+  //toothhSlider (height)
   toothhSlider = createSlider(0, 100, 10, 1);
   toothhSlider.position(10, 50);
   toothhSlider.style('width', '300px');
 
-  //toothwSlider
+  //toothwSlider (width)
   toothwSlider = createSlider(0, 100, 16, 1);
   toothwSlider.position(10, 90);
   toothwSlider.style('width', '300px');
 
-  //speedSlider
+  //speedSlider (width)
   speedSlider = createSlider(0, 5, 1, 0.1);
   speedSlider.position(10, 130);
   speedSlider.style('width', '300px');
@@ -39,8 +39,8 @@ function draw() {
   textSize(21);
 
   // tooth scale
-  let toothscale = toothsSlider.value()
-  text("Tooth scale: " + toothscale, toothsSlider.x * 2 + toothsSlider.width, toothsSlider.y + 16);
+  let toothoffset = toothoSlider.value()
+  text("Tooth offset: " + toothoffset, toothoSlider.x * 2 + toothoSlider.width, toothoSlider.y + 16);
 
   // tooth height
   let toothheight = toothhSlider.value()
@@ -60,20 +60,20 @@ function draw() {
   text("Diameter of g2: " + g2size, g2sizeSlider.x * 2 + g2sizeSlider.width, g2sizeSlider.y + 16);
 
   // gears[0]
-  gears.push(new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, toothwidth, toothscale, 100));
-  // gears[0].draw();
+  gears.push(new Gear(mouseX, mouseY, 100, 120, 130, speed, 1, 0, toothheight, toothwidth, toothoffset, 100));
+  gears[0].draw();
 
   // print(gears[0].x) // How to get a parameter (example for quick reference)
   
   // gears[1]
-  gears.push(new Gear(mouseX + gears[0].diameter/2 + g2size/2 + toothheight, mouseY, 139, 0, 0, speed, -1, 15, toothheight, toothwidth, toothscale, g2size)); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
+  gears.push(new Gear(mouseX + gears[0].diameter/2 + g2size/2 + toothheight, mouseY, 139, 0, 0, speed, -1, 15, toothheight, toothwidth, toothoffset, g2size)); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
   gears[1].draw();
 }
 
 var angle = 0 // This needs to be global, since gears can't move at different rates
 
 class Gear{
-   constructor(x, y, colR, colG, colB, speed, direction, offset, toothheight, toothwidth, toothscale, diameter){
+   constructor(x, y, colR, colG, colB, speed, direction, offset, toothheight, toothwidth, toothoffset, diameter){
       this.x = x;
       this.y = y;
       this.colR = colR;
@@ -84,7 +84,7 @@ class Gear{
       this.offset = offset; // Angle offset, to interlock with neighbouring gears
       this.toothheight = toothheight;
       this.toothwidth = toothwidth;
-      this.toothscale = toothscale;
+      this.toothoffset = toothoffset;
       this.diameter = diameter;
    }
    draw(){
@@ -101,10 +101,10 @@ class Gear{
         
 
         // Measuring out how to draw the trapezium-shaped teeth
-        let yLO = (-(this.diameter/2) + 1); // +1 for making sure there's no gap between the circle and tooth
-        let yHI = (yLO - this.toothheight * this.toothscale);
-        let xHI = this.toothwidth/2 * this.toothscale;
-        let xLO = xHI * (5/8) * this.toothscale; // (5/8) keeps the trapezium shape scale true to the original sketch
+        let yLO = -(this.diameter/2) + this.toothoffset; // +1 for making sure there's no gap between the circle and tooth
+        let yHI = yLO - this.toothheight;
+        let xHI = this.toothwidth/2;
+        let xLO = xHI * (5/8); // (5/8) keeps the trapezium shape scale true to the original sketch
 
         quad(-xLO, yHI, xLO, yHI, xHI, yLO, -xHI, yLO); // The drawing of the tooth
 
@@ -116,8 +116,8 @@ class Gear{
 }
 
 // TODO
-// add toothoffset to counterbalance the trapezium calcs leaving gaps for bigger gears (default = 1)
-// more colour options - maybe a colour picker library?
+// add toothoffset to counterbalance the trapezium calcs leaving gaps for bigger gears (default = 1), get rid of toothscale
+// more colour options
 // button to add gears (and remove them - so possibly left click right click)
 // sparks!
 // probably more stuff too
