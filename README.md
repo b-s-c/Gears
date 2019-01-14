@@ -63,7 +63,11 @@ speed
 
 - how quickly the gear spins
 - positive numerical value
-- 0 will halt the gear, 1 is a moderate speed, 0.1 is very slow and 10000 is far too high
+- quick guide to speeds:
+  - 0 will halt the gear
+  - 1 is a moderate speed
+  - 0.1 is very slow
+  - 5 is very fast
 
 ----
 
