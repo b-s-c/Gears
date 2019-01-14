@@ -11,9 +11,12 @@ gears.push(new Gear(mouseX, mouseY, 139, 0, 0, 255, 1, -1, 0, 10, 16, 1, 12, 180
 
 Parameters:
 - x
-test
 
-y
+xtest
+
+- y
+
+ytest
 
 
 colR
