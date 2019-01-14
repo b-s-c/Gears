@@ -11,4 +11,18 @@ gears.push(new Gear(mouseX, mouseY, 139, 0, 0, 255, speed, -1, angleoffset, toot
 
 Parameters
 - x
+fkokv
 - y
+dfvp[df
+- colR
+- colG
+- colB
+- alpha
+- speed
+- direction
+- angleoffset
+- toothheight
+- toothwidth
+- toothoffset
+- teethamount
+- diameter
