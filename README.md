@@ -104,6 +104,7 @@ toothoffset
 
 - the distance between the teeth and main body of the gear
 - measured in pixels
+- the greater the value, the closer the teeth move towards the centre of the gear
 
 ----
 
