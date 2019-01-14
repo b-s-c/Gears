@@ -13,82 +13,97 @@ Parameters:
 
 x
 
-- xtest
+- the x-coordinate of the gear
+- measured in pixels
 
 ----
 
 y
 
-- ytest
+- the y-coordinate of the gear
+- measured in pixels
 
 ----
 
 colR
 
-- colRdesc
+- the red value of the colour of the gear
+- value in the range 0-255
 
 ----
 
 colG
 
-- colGdesc
+- the green value of the colour of the gear
+- value in the range 0-255
 
 ----
 
 colB
 
-- colBdesc
+- the blue value of the colour of the gear
+- value in the range 0-255
 
 ----
 
 alpha
 
-- alphadesc
+- the opacity of the gear
+- value in the range 0-255, where 0 is invisible and 255 is opaque
 
 ----
 
 speed
 
-- speeddesc
+- how quickly the gear spins
+- positive numerical value
+- 0 will halt the gear, 1 is a moderate speed, 0.1 is very slow and 10000 is far too high
 
 ----
 
 direction
 
-- dirdesc
+- the direction in which the gear turns
+- 1 is clockwise, -1 is counter-clockwise
 
 ----
 
 angleoffset
 
-- aodesc
+- the angle at which the gear is initialised
+- measured in degrees, and so is a positive number in the range 0-360
 
 ----
 
 toothheight
 
-- thdesc
+- height of the teeth
+- measured in pixels
 
 ----
 
 toothwidth
 
-- twdesc
+- width of the teeth
+- measured in pixels
 
 ----
 
 toothoffset
 
-- todesc
+- the distance between the teeth and main body of the gear
+- measured in pixels
 
 ----
 
 teethamount
 
-- tadesc
+- the number of teeth on the gear
+- is a positive integer
 
 ----
 
 diameter
 
-- diameterdesc
+- the diameter of the main body of the gear
+- measured in pixels
