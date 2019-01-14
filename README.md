@@ -1,4 +1,4 @@
-# prog-assessment-p5
+# Gears
 
 A fork of https://www.openprocessing.org/sketch/450390
 
