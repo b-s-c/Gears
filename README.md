@@ -82,6 +82,7 @@ angleoffset
 
 - the angle at which the gear is initialised
 - measured in degrees, and so is a positive number in the range 0-360
+- its primary use is to allow gears to be linked together
 
 ----
 
