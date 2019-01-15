@@ -4,6 +4,8 @@ A fork of https://www.openprocessing.org/sketch/450390.
 
 Licensed under [Creative Commons Attribution ShareAlike](https://creativecommons.org/licenses/by-sa/3.0/).
 
+Developed on the Chromium engine, but works fine on any modern browser
+
 
 # What's different?
 
