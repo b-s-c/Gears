@@ -15,7 +15,6 @@ Lots of features have been added, including but not limited to:
 - full customisation of the teeth (width and height)
 - options to change how quickly the gear spins
 
-----
 
 # Initialising a new gear
 
