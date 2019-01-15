@@ -94,14 +94,14 @@ function draw() {
   text("Number of teeth", teethamountbox.x + teethamountbox.width + 10, teethamountbox.y + 16);
 
   // gears[0]
-  gears.push(new Gear(150, 500, 100, 120, 130, opacity, speed, 1, 0, "tri", toothheight, toothwidth, toothoffset, teethamount, 100));
+  gears.push(new Gear(150, 500, 100, 120, 130, opacity, speed, 1, 0, "tra", toothheight, toothwidth, toothoffset, teethamount, 100));
   gears[0].draw();
 
   // print(gears[0].x) // How to get a parameter (example for quick reference)
   
   // gears[1]
   gears.push(new Gear(gears[0].x + gears[0].diameter/2 + g2size/2 + toothheight, gears[0].y, 139, 0, 0, opacity, speed, -1, 
-angleoffset, "tri", toothheight, toothwidth, toothoffset, teethamount, g2size));
+angleoffset, "tra", toothheight, toothwidth, toothoffset, teethamount, g2size));
   gears[1].draw();
 }
 
