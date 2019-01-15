@@ -94,21 +94,21 @@ function draw() {
   text("Number of teeth", teethamountbox.x + teethamountbox.width + 10, teethamountbox.y + 16);
 
   // gears[0]
-  gears.push(new Gear(150, 500, 100, 120, 130, opacity, speed, 1, 0, toothheight, toothwidth, toothoffset, teethamount, 100));
+  gears.push(new Gear(150, 500, 100, 120, 130, opacity, speed, 1, 0, "tra", toothheight, toothwidth, toothoffset, teethamount, 100));
   gears[0].draw();
 
   // print(gears[0].x) // How to get a parameter (example for quick reference)
   
   // gears[1]
   gears.push(new Gear(gears[0].x + gears[0].diameter/2 + g2size/2 + toothheight, gears[0].y, 139, 0, 0, opacity, speed, -1, 
-angleoffset, toothheight, toothwidth, toothoffset, teethamount, g2size));
+angleoffset, "tra", toothheight, toothwidth, toothoffset, teethamount, g2size));
   gears[1].draw();
 }
 
 var angle = 0 // This needs to be global, since gears can't move at different rates
 
 class Gear{
-   constructor(x, y, colR, colG, colB, alpha, speed, direction, angleoffset, toothheight, toothwidth, toothoffset, teethamount, diameter){
+   constructor(x, y, colR, colG, colB, alpha, speed, direction, angleoffset, teethshape, toothheight, toothwidth, toothoffset, teethamount, diameter){
       this.x = x;
       this.y = y;
       this.colR = colR;
@@ -118,6 +118,7 @@ class Gear{
       this.speed = speed;
       this.direction = direction; // 1 (clockwise) or -1 (counter-clockwise)
       this.angleoffset = angleoffset; // Angle offset, to interlock with neighbouring gears
+      this.teethshape = teethshape;
       this.toothheight = toothheight;
       this.toothwidth = toothwidth;
       this.toothoffset = toothoffset;
@@ -136,14 +137,18 @@ class Gear{
         translate(this.x, this.y); // Ensures that the teeth move with the gear
         rotate(radians((angle + i + this.angleoffset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
         
-
-        // Measuring out how to draw the trapezium-shaped teeth
-        let yLO = -(this.diameter/2) + this.toothoffset; // +1 for making sure there's no gap between the circle and tooth
-        let yHI = yLO - this.toothheight;
-        let xHI = this.toothwidth/2;
-        let xLO = xHI * (5/8); // (5/8) keeps the trapezium shape scale true to the original sketch
-
-        quad(-xLO, yHI, xLO, yHI, xHI, yLO, -xHI, yLO); // The drawing of the tooth
+        if (teethshape = "tra") {
+          // Measuring out how to draw the trapezium-shaped teeth
+          let yLO = -(this.diameter/2) + this.toothoffset; // +1 for making sure there's no gap between the circle and tooth
+          let yHI = yLO - this.toothheight;
+          let xHI = this.toothwidth/2;
+          let xLO = xHI * (5/8); // (5/8) keeps the trapezium shape scale true to the original sketch
+          quad(-xLO, yHI, xLO, yHI, xHI, yLO, -xHI, yLO); // The drawing of the tooth
+        } else if (teethshape = "tri") {
+          console.log("This is a placeholder! :)")
+        } else {
+          text("Invalid value passed to teethshape", mouseX, mouseY);
+        }
 
         pop(); //See push();
       }
@@ -153,8 +158,8 @@ class Gear{
 }
 
 // TODO
+// triangle teeth
 // make a nice example sketch
-// more colour options
 // button to add gears (and remove them - so possibly left click right click)
 // sparks!
 // probably more stuff too
