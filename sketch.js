@@ -136,24 +136,30 @@ class Gear{
         push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
         translate(this.x, this.y); // Ensures that the teeth move with the gear
         rotate(radians((angle + i + this.angleoffset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
-        
-        if (teethshape = "tra") {
+        if (this.teethshape == "tra") {
           // Measuring out how to draw the trapezium-shaped teeth
           let yLO = -(this.diameter/2) + this.toothoffset; // +1 for making sure there's no gap between the circle and tooth
           let yHI = yLO - this.toothheight;
           let xHI = this.toothwidth/2;
           let xLO = xHI * (5/8); // (5/8) keeps the trapezium shape scale true to the original sketch
           quad(-xLO, yHI, xLO, yHI, xHI, yLO, -xHI, yLO); // The drawing of the tooth
-        } else if (teethshape = "tri") {
-          console.log("This is a placeholder! :)")
+          pop(); //See push();
+        } else if (this.teethshape == "tri") {
+          console.log("This is a placeholder! :)");
+          pop(); //See push();
         } else {
-          text("Invalid value passed to teethshape", mouseX, mouseY);
+          pop(); //See push();
+          this.invalidShape();
         }
 
-        pop(); //See push();
+        
       }
       angle += this.speed; // Adjust how fast the gear should spin
       angle = angle % 360;
+   }
+   invalidShape(){ // This needs to be here, since it's a parameter that could easily cause an error
+      fill(255);
+      text("Invalid value passed to teethshape; please consult the documentation.", mouseX, mouseY);
    }
 }
 
