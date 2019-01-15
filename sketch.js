@@ -168,7 +168,7 @@ class Gear{
 }
 
 // TODO
-// triangle teeth
+// separate example and core .js files
 // make a nice example sketch
 // button to add gears (and remove them - so possibly left click right click)
 // sparks!
