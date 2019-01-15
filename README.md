@@ -13,12 +13,13 @@ Lots of features have been added, including but not limited to:
 - using a class to define the gear, allowing you to make as many gears as you want
 - options to change the colour and opacity of the gear
 - options to change the location and size of the gear
-- full customisation of the teeth (width and height)
+- full customisation of the teeth (width, height and shape)
 - options to change how quickly the gear spins
 
 
 # Initialising a new gear
 
+# Update these at the end!
 General:
 
 `gears.push(new Gear(x, y, colR, colG, colB, alpha, speed, direction, angleoffset, toothheight, toothwidth, toothoffset, teethamount, diameter));`
@@ -99,6 +100,13 @@ angleoffset
 
 ----
 
+teethshape
+
+- the shape in which the teeth are drawn
+- can be either trapezium-shaped or triangle-shaped
+- use by passing "tra" or "tri" 
+
+----
 toothheight
 
 - height of the teeth
