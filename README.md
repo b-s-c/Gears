@@ -4,6 +4,17 @@ A fork of https://www.openprocessing.org/sketch/450390.
 
 Licensed under [Creative Commons Attribution ShareAlike](https://creativecommons.org/licenses/by-sa/3.0/).
 
+
+# What's different?
+
+Lots of features have been added, including but not limited to:
+
+- using a class to define the gear, allowing you to make as many gears as you want
+- options to change the colour and opacity of the gear
+- options to change the location and size of the gear
+- full customisation of the teeth (width and height)
+- options to change how quickly the gear spins
+
 ----
 
 # Initialising a new gear
