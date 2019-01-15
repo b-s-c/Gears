@@ -9,6 +9,7 @@ Licensed under [Creative Commons Attribution ShareAlike](https://creativecommons
 
 Lots of features have been added, including but not limited to:
 
+- a rework to how the gear is drawn, allowing for more customisation
 - using a class to define the gear, allowing you to make as many gears as you want
 - options to change the colour and opacity of the gear
 - options to change the location and size of the gear
