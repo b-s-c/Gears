@@ -41,7 +41,7 @@ function setup() {
   g2sizeSlider.position(10, 210);
   g2sizeSlider.style('width', '300px');
 
-  // opacitySlider
+  //opacitySlider
   opacitySlider = createSlider(0, 255, 255, 1);
   opacitySlider.position(10, 250);
   opacitySlider.style('width', '300px');
