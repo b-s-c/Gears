@@ -101,7 +101,7 @@ function draw() {
   
   // gears[1]
   gears.push(new Gear(gears[0].x + gears[0].diameter/2 + g2size/2 + toothheight, gears[0].y, 139, 0, 0, opacity, speed, -1, 
-angleoffset, "tra", toothheight, toothwidth, toothoffset, teethamount, g2size));
+angleoffset, "tri", toothheight, toothwidth, toothoffset, teethamount, g2size));
   gears[1].draw();
 }
 
@@ -136,23 +136,25 @@ class Gear{
         push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
         translate(this.x, this.y); // Ensures that the teeth move with the gear
         rotate(radians((angle + i + this.angleoffset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
-        if (this.teethshape == "tra") {
-          // Measuring out how to draw the trapezium-shaped teeth
-          let yLO = -(this.diameter/2) + this.toothoffset; // +1 for making sure there's no gap between the circle and tooth
+        
+        if (this.teethshape == "tra" || this.teethshape == "tri"){
+          // If we're here, then this.teethshape is valid. Therefore, we can measure out how to draw the teeth
+          let yLO = -(this.diameter/2) + this.toothoffset; // toothoffset for making sure there's no gap between the circle and tooth
           let yHI = yLO - this.toothheight;
           let xHI = this.toothwidth/2;
+          if (this.teethshape == "tra") {
           let xLO = xHI * (5/8); // (5/8) keeps the trapezium shape scale true to the original sketch
           quad(-xLO, yHI, xLO, yHI, xHI, yLO, -xHI, yLO); // The drawing of the tooth
-          pop(); //See push();
-        } else if (this.teethshape == "tri") {
-          console.log("This is a placeholder! :)");
-          pop(); //See push();
+          } else if (this.teethshape == "tri") {
+          let xLO = 0
+          triangle(-xHI, yLO, xHI, yLO, xLO, yHI);
+          } 
         } else {
           pop(); //See push();
           this.invalidShape();
         }
 
-        
+        pop(); //See push();
       }
       angle += this.speed; // Adjust how fast the gear should spin
       angle = angle % 360;
