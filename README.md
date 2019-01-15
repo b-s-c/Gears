@@ -1,6 +1,6 @@
 # Gears
 
-A fork of https://www.openprocessing.org/sketch/450390
+A fork of https://www.openprocessing.org/sketch/450390, created under [Creative Commons Attribution ShareAlike](https://creativecommons.org/licenses/by-sa/3.0/)
 
 ----
 
