@@ -1,5 +1,12 @@
 // Customisable gears
 
+
+
+// https://p5js.org/reference/#/p5/windowWidth + windowHeight to create background decoration
+
+// updated version including transparency fixes
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(60); // High refresh rates like 144 and 165 break the motion slightly, but they're not recommended anyway
@@ -33,6 +40,11 @@ function setup() {
   g2sizeSlider = createSlider(10, 400, 100, 1);
   g2sizeSlider.position(10, 210);
   g2sizeSlider.style('width', '300px');
+
+  //opacitySlider
+  opacitySlider = createSlider(0, 255, 255, 1);
+  opacitySlider.position(10, 250);
+  opacitySlider.style('width', '300px');
 
   teethamountbox = createInput("10");
   teethamountbox.position(toothoSlider.width + 250, 10);
@@ -73,18 +85,23 @@ function draw() {
   let g2size = g2sizeSlider.value()
   text("Diameter of g2: " + g2size, g2sizeSlider.x * 2 + g2sizeSlider.width, g2sizeSlider.y + 16);
 
+  // opacity
+  let opacity = opacitySlider.value()
+  text("Opacity: " + opacity, opacitySlider.x * 2 + opacitySlider.width, opacitySlider.y + 16);
+
   // teethamount
   let teethamount = teethamountbox.value();
   text("Number of teeth", teethamountbox.x + teethamountbox.width + 10, teethamountbox.y + 16);
 
   // gears[0]
-  gears.push(new Gear(mouseX, mouseY, 100, 120, 130, 255, speed, 1, 0, toothheight, toothwidth, toothoffset, teethamount, 100));
+  gears.push(new Gear(150, 500, 100, 120, 130, opacity, speed, 1, 0, toothheight, toothwidth, toothoffset, teethamount, 100));
   gears[0].draw();
 
   // print(gears[0].x) // How to get a parameter (example for quick reference)
   
   // gears[1]
-  gears.push(new Gear(mouseX + gears[0].diameter/2 + g2size/2 + toothheight, mouseY, 139, 0, 0, 255, speed, -1, angleoffset, toothheight, toothwidth, toothoffset, teethamount, g2size)); // mouseY-100-11 for vertically above, mouseX+100+11 for horizontally right
+  gears.push(new Gear(gears[0].x + gears[0].diameter/2 + g2size/2 + toothheight, gears[0].y, 139, 0, 0, opacity, speed, -1, 
+angleoffset, toothheight, toothwidth, toothoffset, teethamount, g2size));
   gears[1].draw();
 }
 
@@ -110,7 +127,7 @@ class Gear{
    draw(){
       fill(this.colR, this.colG, this.colB, this.alpha); // Set gear colour    
       ellipse(this.x, this.y, this.diameter, this.diameter); // Draw the main circle
-      fill(0); // Set colour to black
+      fill(0, 0, 0, this.alpha); // Set colour to black
       ellipse(this.x, this.y, 20, 20);
       fill(this.colR, this.colG, this.colB, this.alpha); // Set tooth colour 
       noStroke(); // Ensure that the teeth don't have an outline
