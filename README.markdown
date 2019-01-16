@@ -29,6 +29,16 @@ e.g.
 
 `gears.push(new Gear(mouseX, mouseY, 139, 0, 0, 255, 1, -1, 0, "tra", 10, 16, 1, 12, 180));`
 
+With p5 renderer:
+
+First, initialise your renderer under setup(), e.g.
+
+`pg = createGraphics(500, 500)`.
+
+Every time you draw a gear, pass to it your createGraphics instance, e.g.
+
+`myGear.draw(pg)`.
+
 # Recommended usage
 
 I'd recommend having an array of gears and storing each gear in its own array slot, as I've done in `example.js`.
