@@ -2,7 +2,7 @@
 
 A fork of [this sketch](https://www.openprocessing.org/sketch/450390).
 
-Developed on the Chromium engine, but works fine on any modern browser
+Developed on the Chromium engine, but works fine on any modern browser.
 
 # What's different?
 
@@ -12,28 +12,50 @@ Lots of features have been added, including but not limited to:
 - using a class to define the gear, allowing you to make as many gears as you want
 - options to change the colour and opacity of the gear
 - options to change the location and size of the gear
-- full customisation of the teeth (width, height and shape)
+- full customisation of the teeth (width, height and shape (trapezium-shaped or triangle-shaped))
 - options to change how quickly the gear spins
+- a test page including elements to test all of the new features, as well as a couple of example setups
 
 
-# Initialising a new gear
+# Initialising a new gear (constructor)
 
-# Update these at the end!
 General:
 
-`gears.push(new Gear(x, y, colR, colG, colB, alpha, speed, direction, angleoffset, toothheight, toothwidth, toothoffset, teethamount, diameter));`
+`gears.push(new Gear(x, y, colR, colG, colB, alpha, speed, direction, angleoffset, teethshape, toothheight, toothwidth, toothoffset, teethamount, diameter));`
 
 e.g. 
 
-`gears.push(new Gear(mouseX, mouseY, 139, 0, 0, 255, 1, -1, 0, 10, 16, 1, 12, 180));`
+`gears.push(new Gear(mouseX, mouseY, 139, 0, 0, 255, 1, -1, 0, "tra", 10, 16, 1, 12, 180));`
+
+# Recommended usage
+
+I'd recommend having an array of gears and storing each gear in its own array slot, as I've done in `example.js`.
 
 
 # Parameters
+
+Each parameter has its own get and set function in the Gear class. 
+
+For example, 
+
+* "x" has 
+  * "getX()" and 
+  * "setX(intcoord)".
+* "teethamount" has
+  * "getTeethAmount()" and
+  * "setTeethAmount(intvalue)".
+
+The other parameters follow the same capitalisation pattern as these examples. If needed, an exhaustive list is provided below.
+
+----
 
 x
 
 - the x-coordinate of the gear
 - measured in pixels
+
+- getX()
+- setX(integer)
 
 ----
 
@@ -42,12 +64,18 @@ y
 - the y-coordinate of the gear
 - measured in pixels
 
+- getY()
+- setY(integer)
+
 ----
 
 colR
 
 - the red value of the colour of the gear
 - value in the range 0-255
+
+- getRGB()[0]
+- setRGB([integer, integer, integer])
 
 ----
 
@@ -56,6 +84,9 @@ colG
 - the green value of the colour of the gear
 - value in the range 0-255
 
+- getRGB()[1]
+- setRGB([integer, integer, integer])
+
 ----
 
 colB
@@ -63,12 +94,18 @@ colB
 - the blue value of the colour of the gear
 - value in the range 0-255
 
+- getRGB()[2]
+- setRGB([integer, integer, integer])
+
 ----
 
 alpha
 
 - the opacity of the gear
 - value in the range 0-255, where 0 is invisible and 255 is opaque
+
+- getAlpha()
+- setAlpha(integer)
 
 ----
 
@@ -82,12 +119,18 @@ speed
   - 0.1 is very slow
   - 5 is very fast
 
+- getSpeed()
+- setSpeed(float)
+
 ----
 
 direction
 
 - the direction in which the gear turns
 - 1 is clockwise, -1 is counter-clockwise
+
+- getDirection()
+- setDirection(integer)
 
 ----
 
@@ -97,6 +140,9 @@ angleoffset
 - measured in degrees, and so is a positive number in the range 0-360
 - its primary use is to allow gears to be linked together
 
+- getAngleOffset()
+- setAngleOffset(integer)
+
 ----
 
 teethshape
@@ -105,11 +151,18 @@ teethshape
 - can be either trapezium-shaped or triangle-shaped
 - use by passing "tra" or "tri" 
 
+- getTeethShape()
+- setTeethShape(string)
+
 ----
+
 toothheight
 
 - height of the teeth
 - measured in pixels
+
+- getToothHeight()
+- setToothHeight(integer)
 
 ----
 
@@ -117,6 +170,9 @@ toothwidth
 
 - width of the teeth
 - measured in pixels
+
+- getToothWidth()
+- setToothWidth(integer)
 
 ----
 
@@ -126,6 +182,9 @@ toothoffset
 - measured in pixels
 - the greater the value, the closer the teeth move towards the centre of the gear
 
+- getToothOffset()
+- setToothOffset(integer)
+
 ----
 
 teethamount
@@ -133,12 +192,18 @@ teethamount
 - the number of teeth on the gear
 - is a positive integer
 
+- getTeethAmount()
+- setTeethAmount(integer)
+
 ----
 
 diameter
 
 - the diameter of the main body of the gear
 - measured in pixels
+
+- getDiameter()
+- setDiameter(integer)
 
 # Credits
 
