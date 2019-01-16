@@ -26,29 +26,28 @@ class Gear{
       ellipse(this.x, this.y, 20, 20);
       fill(this.colR, this.colG, this.colB, this.alpha); // Set tooth colour 
       noStroke(); // Ensure that the teeth don't have an outline
+
+      if (this.teethshape != "tra" && this.teethshape != "tri"){
+        this.invalidShape();
+      }
+
       for (var i = 0; i < 360; i += 360/this.teethamount) { // Draw a tooth on the gear a given number of times 
         push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
         translate(this.x, this.y); // Ensures that the teeth move with the gear
         rotate(radians((this.angle + i + this.angleoffset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
+      
+        // If we're here, then this.teethshape is valid. Therefore, we can measure out how to draw the teeth
+        let yLO = -(this.diameter/2) + this.toothoffset; // toothoffset for making sure there's no gap between the circle and tooth
+        let yHI = yLO - this.toothheight;
+        let xHI = this.toothwidth/2;
         
-        if (this.teethshape == "tra" || this.teethshape == "tri"){
-          // If we're here, then this.teethshape is valid. Therefore, we can measure out how to draw the teeth
-          let yLO = -(this.diameter/2) + this.toothoffset; // toothoffset for making sure there's no gap between the circle and tooth
-          let yHI = yLO - this.toothheight;
-          let xHI = this.toothwidth/2;
-          
-          if (this.teethshape == "tra") {
+        if (this.teethshape == "tra") {
           let xLO = xHI * (5/8); // (5/8) keeps the trapezium shape scale true to the original sketch
           quad(-xLO, yHI, xLO, yHI, xHI, yLO, -xHI, yLO); // The drawing of the tooth
-          } else if (this.teethshape == "tri") {
+        } else if (this.teethshape == "tri") {
           let xLO = 0
           triangle(-xHI, yLO, xHI, yLO, xLO, yHI);
-          } 
-        } else {
-          pop(); //See push();
-          this.invalidShape();
-        }
-
+        } 
         pop(); //See push();
       }
       this.angle += this.speed; // Adjust how fast the gear should spin
@@ -56,7 +55,7 @@ class Gear{
    }
    invalidShape(){ // This needs to be here, since it's a parameter that could easily cause an error
       fill(255);
-      text("Invalid value passed to teethshape; please consult the documentation.", mouseX, mouseY);
+      window.alert("Invalid value passed to teethshape; please consult the documentation.");
    }
    getangle(){
    	  this.angle += this.speed;
