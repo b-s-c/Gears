@@ -93,6 +93,12 @@ class Gear{
    setSpeed(newspeed){
       this.speed = newspeed;
    }
+   getDirection(){
+      return this.direction;
+   }
+   setDirection(newdir){
+      this.direction = newdirection;
+   }
    getAngleOffset(){
       return this.angleoffset;
    }
