@@ -1,9 +1,8 @@
 # Gears
 
-A fork of https://www.openprocessing.org/sketch/450390.
+A fork of [this sketch](https://www.openprocessing.org/sketch/450390).
 
 Developed on the Chromium engine, but works fine on any modern browser
-
 
 # What's different?
 
@@ -140,3 +139,7 @@ diameter
 
 - the diameter of the main body of the gear
 - measured in pixels
+
+# Credits
+
+[Markdown-formatted CC licenses](https://github.com/idleberg/Creative-Commons-Markdown)
