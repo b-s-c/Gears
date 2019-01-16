@@ -1,7 +1,5 @@
 // Customisable gears
 
-// var angle = 0 // This needs to be global, since gears can't move at different rates
-
 class Gear{
    constructor(angle, x, y, colR, colG, colB, alpha, speed, direction, angleoffset, teethshape, toothheight, toothwidth, toothoffset, teethamount, diameter){
       this.angle = angle;
@@ -67,7 +65,6 @@ class Gear{
 }
 
 // TODO
-// separate example and core .js files
 // make a nice example sketch
 // button to add gears (and remove them - so possibly left click right click)
 // sparks!
