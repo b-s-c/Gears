@@ -70,3 +70,7 @@ class Gear{
 // button to add gears (and remove them - so possibly left click right click)
 // sparks!
 // probably more stuff too
+
+// for DOM, this
+// https://github.com/stevenaeola/Prog18potatoes/blob/master/ball/index.js
+
