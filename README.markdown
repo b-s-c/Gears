@@ -35,11 +35,11 @@ With p5 renderer:
 
 First, initialise your renderer under setup(), e.g.
 
-`pg = createGraphics(500, 500)`.
+`pg = createGraphics(500, 500);`
 
 Every time you draw a gear, pass to it your createGraphics instance, e.g.
 
-`myGear.draw(pg)`.
+`myGear.draw(pg);`
 
 # Recommended usage
 
