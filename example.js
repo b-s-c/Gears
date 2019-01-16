@@ -99,8 +99,9 @@ function draw() {
   gears[1].draw(geardata[0]);
 
   for (var i = 0; i < gears.length; i += 1){ // Update geardata with the new angle 
-    geardata[0] += gears[i].getangle()
+    geardata[0] += gears[i].getangle();
   }
+
 }
 
 // TODO

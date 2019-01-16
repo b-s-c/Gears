@@ -65,6 +65,8 @@ class Gear{
 }
 
 // TODO
+// add defaults with || (https://github.com/stevenaeola/Prog18potatoes/blob/master/ball/ball.js)
+// add setters (https://github.com/stevenaeola/Prog18potatoes/blob/master/ball/ball.js)
 // add HTML interaction (buttons probably)
 // make a nice example sketch
 // button to add gears (and remove them - so possibly left click right click)
