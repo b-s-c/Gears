@@ -197,6 +197,8 @@ teethamount
 - getTeethAmount()
 - setTeethAmount(integer)
 
+Note: In my testing, the sketch lags at around 10000 or so teeth being drawn (@60fps). YMMV, but I think anything above 1000 shouldn't be needed anyway.
+
 ----
 
 diameter
