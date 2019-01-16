@@ -100,7 +100,6 @@ function draw() {
   
   geardata[0] += gears[0].getangle(); // again, a for loop will be best here
   geardata[0] += gears[1].getangle();
-
 }
 
 // TODO
