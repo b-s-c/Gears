@@ -33,7 +33,7 @@ function setup(){
   g2sizeSlider.style('width', '300px');
 
   //opacitySlider
-  opacitySlider = createSlider(0, 255, 255, 1);
+  opacitySlider = createSlider(1, 255, 255, 1);
   opacitySlider.position(10, toothoSlider.y + 240);
   opacitySlider.style('width', '300px');
 
