@@ -29,6 +29,8 @@ e.g.
 
 `gears.push(new Gear(mouseX, mouseY, 139, 0, 0, 255, 1, -1, 0, "tra", 10, 16, 1, 12, 180));`
 
+----
+
 With p5 renderer:
 
 First, initialise your renderer under setup(), e.g.
