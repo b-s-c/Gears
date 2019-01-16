@@ -1,7 +1,9 @@
 // Customisable gears
 
+var angle = 0
+
 class Gear{
-   constructor(angle, x, y, colR, colG, colB, alpha, speed, direction, angleoffset, teethshape, toothheight, toothwidth, toothoffset, teethamount, diameter){
+   constructor(x, y, colR, colG, colB, alpha, speed, direction, angleoffset, teethshape, toothheight, toothwidth, toothoffset, teethamount, diameter){
       this.angle = angle;
       this.x = x;
       this.y = y;
@@ -28,13 +30,13 @@ class Gear{
       noStroke(); // Ensure that the teeth don't have an outline
 
       if (this.teethshape != "tra" && this.teethshape != "tri"){
-        this.invalidShape();
+        this.errorCatcher("invalidShape");
       }
 
       for (var i = 0; i < 360; i += 360/this.teethamount) { // Draw a tooth on the gear a given number of times 
         push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
         translate(this.x, this.y); // Ensures that the teeth move with the gear
-        rotate(radians((this.angle + i + this.angleoffset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
+        rotate(radians((angle + i + this.angleoffset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
       
         // If we're here, then this.teethshape is valid. Therefore, we can measure out how to draw the teeth
         let yLO = -(this.diameter/2) + this.toothoffset; // toothoffset for making sure there's no gap between the circle and tooth
@@ -50,16 +52,77 @@ class Gear{
         } 
         pop(); //See push();
       }
-      this.angle += this.speed; // Adjust how fast the gear should spin
-      this.angle = this.angle % 360;
+      angle += this.speed; // Adjust how fast the gear should spin
+      angle = angle % 360;
    }
-   invalidShape(){ // This needs to be here, since it's a parameter that could easily cause an error
-      fill(255);
-      window.alert("Invalid value passed to teethshape; please consult the documentation.");
+   errorCatcher(type){
+      if (type == "invalidShape"){
+        fill(255);
+        window.alert("Invalid value passed to teethshape; please consult the documentation. Refresh the page to try again.");
+      }
    }
-   getangle(){
-   	  this.angle += this.speed;
-   	  return this.angle % 360;
+   // returnangle(){
+   // 	  this.angle += this.speed;
+   // 	  return this.angle % 360;
+   // }
+   getX(){
+      return this.x;
+   }
+   setX(newx){
+      this.x = newx
+   }
+   getY(){
+      return this.y;
+   }
+   setX(newx){
+      this.y = newy;
+   }
+   getRGB(){
+      return [this.colR, this.colG, this.colB];
+   }
+   setRGB(rgbarray){
+      this.colR = rgbarray[0];
+      this.colG = rgbarray[1];
+      this.colB = rgbarray[2];
+   }
+   getAlpha(){
+      return this.alpha;
+   }
+   setAlpha(newalpha){
+      this.alpha = newalpha;
+   }
+   getSpeed(){
+      return this.speed;
+   }
+   setSpeed(newspeed){
+      this.speed = newspeed;
+   }
+   getAngleOffset(){
+      return this.angleoffset;
+   }
+   setAngleOffset(newangleoffset){
+      this.angleoffset = newangleoffset;
+   }
+   getTeethShape(){
+      return this.teethshape;
+   }
+   setTeethShape(newteethshape){
+      this.teethshape = newteethshape;
+   }
+
+   getDiameter(){
+      return this.diameter;
+   }
+   setDiameter(newdiameter){
+      this.diameter = newdiameter;
+   }
+
+   getTeethAmount(){
+      return this.teethamount;
+   }
+
+   setTeethAmount(newteethcount){
+      this.teethcount = newteethcount
    }
 }
 
