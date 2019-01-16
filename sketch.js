@@ -4,22 +4,22 @@ var angle = 0
 
 class Gear{
    constructor(x, y, colR, colG, colB, alpha, speed, direction, angleoffset, teethshape, toothheight, toothwidth, toothoffset, teethamount, diameter){
-      this.angle = angle;
-      this.x = x;
-      this.y = y;
-      this.colR = colR;
-      this.colG = colG;
-      this.colB = colB;
-      this.alpha = alpha
-      this.speed = speed;
-      this.direction = direction; // 1 (clockwise) or -1 (counter-clockwise)
-      this.angleoffset = angleoffset; // Angle offset, to interlock with neighbouring gears
-      this.teethshape = teethshape;
-      this.toothheight = toothheight;
-      this.toothwidth = toothwidth;
-      this.toothoffset = toothoffset;
-      this.teethamount = teethamount;
-      this.diameter = diameter;
+      // this.angle = angle;
+      this.x = x || 0;
+      this.y = y || 0;
+      this.colR = colR || 0;
+      this.colG = colG || 0;
+      this.colB = colB || 0;
+      this.alpha = alpha || 255;
+      this.speed = speed || 0.5;
+      this.direction = direction || 1; // 1 (clockwise) or -1 (counter-clockwise)
+      this.angleoffset = angleoffset || 0; // Angle offset, to interlock with neighbouring gears
+      this.teethshape = teethshape || "tra";
+      this.toothheight = toothheight || 10;
+      this.toothwidth = toothwidth || 16;
+      this.toothoffset = toothoffset || 1;
+      this.teethamount = teethamount || 12;
+      this.diameter = diameter || 100;
    }
    draw(){
       fill(this.colR, this.colG, this.colB, this.alpha); // Set gear colour    
@@ -61,10 +61,6 @@ class Gear{
         window.alert("Invalid value passed to teethshape; please consult the documentation. Refresh the page to try again.");
       }
    }
-   // returnangle(){
-   // 	  this.angle += this.speed;
-   // 	  return this.angle % 360;
-   // }
    getX(){
       return this.x;
    }
@@ -109,32 +105,34 @@ class Gear{
    setTeethShape(newteethshape){
       this.teethshape = newteethshape;
    }
-
+   getToothHeight(){
+      return this.toothheight;
+   }
+   setToothHeight(newheight){
+      this.toothheight = newheight;
+   }
+   getToothWidth(){
+      return this.toothwidth;
+   }
+   setToothWidth(newwidth){
+      this.toothwidth = newwidth
+   }
+   getToothOffset(){
+      return this.toothoffset;
+   }
+   setToothOffset(newoffset){
+      this.toothoffset = newoffset
+   }
    getDiameter(){
       return this.diameter;
    }
    setDiameter(newdiameter){
       this.diameter = newdiameter;
    }
-
    getTeethAmount(){
       return this.teethamount;
    }
-
    setTeethAmount(newteethcount){
-      this.teethcount = newteethcount
+      this.teethcount = newteethcount;
    }
 }
-
-// TODO
-// add defaults with || (https://github.com/stevenaeola/Prog18potatoes/blob/master/ball/ball.js)
-// add setters (https://github.com/stevenaeola/Prog18potatoes/blob/master/ball/ball.js)
-// add HTML interaction (buttons probably)
-// make a nice example sketch
-// button to add gears (and remove them - so possibly left click right click)
-// sparks!
-// probably more stuff too
-
-// for DOM, this
-// https://github.com/stevenaeola/Prog18potatoes/blob/master/ball/index.js
-
