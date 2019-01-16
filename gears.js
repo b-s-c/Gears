@@ -21,36 +21,69 @@ class Gear{
       this.teethamount = teethamount || 12;
       this.diameter = diameter || 100;
    }
-   draw(){
-      fill(this.colR, this.colG, this.colB, this.alpha); // Set gear colour    
-      ellipse(this.x, this.y, this.diameter, this.diameter); // Draw the main circle
-      fill(0, 0, 0, this.alpha); // Set colour to black
-      ellipse(this.x, this.y, 20, 20);
-      fill(this.colR, this.colG, this.colB, this.alpha); // Set tooth colour 
-      noStroke(); // Ensure that the teeth don't have an outline
+   draw(renderer){
+      if (renderer) {
+        renderer.fill(this.colR, this.colG, this.colB, this.alpha); // Set gear colour    
+        renderer.ellipse(this.x, this.y, this.diameter, this.diameter); // Draw the main circle
+        renderer.fill(0, 0, 0, this.alpha); // Set colour to black
+        renderer.ellipse(this.x, this.y, 20, 20);
+        renderer.fill(this.colR, this.colG, this.colB, this.alpha); // Set tooth colour 
+        renderer.noStroke(); // Ensure that the teeth don't have an outline
 
-      if (this.teethshape != "tra" && this.teethshape != "tri"){
-        this.errorCatcher("invalidShape");
-      }
+        if (this.teethshape != "tra" && this.teethshape != "tri"){
+          this.errorCatcher("invalidShape");
+        }
 
-      for (var i = 0; i < 360; i += 360/this.teethamount) { // Draw a tooth on the gear a given number of times 
-        push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
-        translate(this.x, this.y); // Ensures that the teeth move with the gear
-        rotate(radians((angle + i + this.angleoffset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
-      
-        // If we're here, then this.teethshape is valid. Therefore, we can measure out how to draw the teeth
-        let yLO = -(this.diameter/2) + this.toothoffset; // toothoffset for making sure there's no gap between the circle and tooth
-        let yHI = yLO - this.toothheight;
-        let xHI = this.toothwidth/2;
+        for (var i = 0; i < 360; i += 360/this.teethamount) { // Draw a tooth on the gear a given number of times 
+          renderer.push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
+          renderer.translate(this.x, this.y); // Ensures that the teeth move with the gear
+          renderer.rotate(radians((angle + i + this.angleoffset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
         
-        if (this.teethshape == "tra") {
-          let xLO = xHI * (5/8); // (5/8) keeps the trapezium shape scale true to the original sketch
-          quad(-xLO, yHI, xLO, yHI, xHI, yLO, -xHI, yLO); // The drawing of the tooth
-        } else if (this.teethshape == "tri") {
-          let xLO = 0
-          triangle(-xHI, yLO, xHI, yLO, xLO, yHI);
-        } 
-        pop(); //See push();
+          // If we're here, then this.teethshape is valid. Therefore, we can measure out how to draw the teeth
+          let yLO = -(this.diameter/2) + this.toothoffset; // toothoffset for making sure there's no gap between the circle and tooth
+          let yHI = yLO - this.toothheight;
+          let xHI = this.toothwidth/2;
+          
+          if (this.teethshape == "tra") {
+            let xLO = xHI * (5/8); // (5/8) keeps the trapezium shape scale true to the original sketch
+            renderer.quad(-xLO, yHI, xLO, yHI, xHI, yLO, -xHI, yLO); // The drawing of the tooth
+          } else if (this.teethshape == "tri") {
+            let xLO = 0
+            renderer.triangle(-xHI, yLO, xHI, yLO, xLO, yHI);
+          } 
+          renderer.pop(); //See push();
+      }
+        } else {
+        fill(this.colR, this.colG, this.colB, this.alpha); // Set gear colour    
+        ellipse(this.x, this.y, this.diameter, this.diameter); // Draw the main circle
+        fill(0, 0, 0, this.alpha); // Set colour to black
+        ellipse(this.x, this.y, 20, 20);
+        fill(this.colR, this.colG, this.colB, this.alpha); // Set tooth colour 
+        noStroke(); // Ensure that the teeth don't have an outline
+
+        if (this.teethshape != "tra" && this.teethshape != "tri"){
+          this.errorCatcher("invalidShape");
+        }
+
+        for (var i = 0; i < 360; i += 360/this.teethamount) { // Draw a tooth on the gear a given number of times 
+          push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
+          translate(this.x, this.y); // Ensures that the teeth move with the gear
+          rotate(radians((angle + i + this.angleoffset) * this.direction)); // Ensures that the teeth are drawn all around the gear (i is the location ON the gear, speed is the speed that the gear is rotating)
+        
+          // If we're here, then this.teethshape is valid. Therefore, we can measure out how to draw the teeth
+          let yLO = -(this.diameter/2) + this.toothoffset; // toothoffset for making sure there's no gap between the circle and tooth
+          let yHI = yLO - this.toothheight;
+          let xHI = this.toothwidth/2;
+          
+          if (this.teethshape == "tra") {
+            let xLO = xHI * (5/8); // (5/8) keeps the trapezium shape scale true to the original sketch
+            quad(-xLO, yHI, xLO, yHI, xHI, yLO, -xHI, yLO); // The drawing of the tooth
+          } else if (this.teethshape == "tri") {
+            let xLO = 0
+            triangle(-xHI, yLO, xHI, yLO, xLO, yHI);
+          } 
+          pop(); //See push();
+      }
       }
       angle += this.speed; // Adjust how fast the gear should spin
       angle = angle % 360;
