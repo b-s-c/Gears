@@ -97,9 +97,10 @@ function draw() {
   angleoffset, "tra", toothheight, toothwidth, toothoffset, teethamount, g2size));
   
   gears[1].draw(geardata[0]);
-  
-  geardata[0] += gears[0].getangle(); // again, a for loop will be best here
-  geardata[0] += gears[1].getangle();
+
+  for (var i = 0; i < gears.length; i += 1){ // Update geardata with the new angle 
+    geardata[0] += gears[i].getangle()
+  }
 }
 
 // TODO
