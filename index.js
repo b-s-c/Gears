@@ -86,8 +86,8 @@ function draw() {
   bggears.push(new Gear(350+240*2+6, 8+500+180*2, 0, 0, 0, 20, 0.01, -1, -1, "tri", 8, 15, -1.5, 120, 600));
 
   // gears.push(new Gear(150, 500, 100, 120, 130, opacity, speed, 1, 0, "tra", toothheight, toothwidth, toothoffset, teethamount, 100));
-  bggears[0].draw();
-  bggears[1].draw();
+  bggears[0].draw(0);
+  bggears[1].draw(0);
 
 
   // Text setup
