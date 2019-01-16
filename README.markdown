@@ -2,19 +2,21 @@
 
 A fork of [this sketch](https://www.openprocessing.org/sketch/450390), Gear.
 
+The original sketch is licensed with [Creative Commons Attribution ShareAlike 3.0](https://creativecommons.org/licenses/by-sa/3.0).
+
 Developed on the Chromium engine, but works fine on any modern browser.
 
 # What's different?
 
 Lots of features have been added, including but not limited to:
 
-- a rework to how the gear is drawn, allowing for more customisation
-- using a class to define the gear, allowing you to make as many gears as you want
-- options to change the colour and opacity of the gear
-- options to change the location and size of the gear
-- full customisation of the teethprog-assessment-p5 (width, height and shape (trapezium-shaped or triangle-shaped))
-- options to change how quickly the gear spins
-- a test page including elements to test all of the new features, as well as a couple of example setups
+- a rework to how the gear is drawn, allowing for more customisation,
+- using a class to define the gear, allowing you to make as many gears as you want,
+- options to change the colour and opacity of the gear,
+- options to change the location and size of the gear,
+- full customisation of the teethprog-assessment-p5 (width, height and shape (trapezium-shaped or triangle-shaped)),
+- options to change how quickly the gear spins,
+- and a test page including elements to test all of the new features, as well as a couple of example setups.
 
 
 # Initialising a new gear (constructor)
