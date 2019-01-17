@@ -61,10 +61,6 @@ class Gear{
         fill(this.colR, this.colG, this.colB, this.alpha); // Set tooth colour 
         noStroke(); // Ensure that the teeth don't have an outline
 
-        if (this.teethshape != "tra" && this.teethshape != "tri"){
-          this.errorCatcher("invalidShape");
-        }
-
         for (var i = 0; i < 360; i += 360/this.teethamount) { // Draw a tooth on the gear a given number of times 
           push(); // push(); and pop(); ensure that we return to the "top" of the gear before going to draw our next gear. Otherwise, we will keep incrementing stuff we don't want to
           translate(this.x, this.y); // Ensures that the teeth move with the gear
